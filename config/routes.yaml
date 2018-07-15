@@ -1,0 +1,17 @@
+# This file is the entry point to configure your own HTTP routes.
+# Files in the routes/ subdirectory configure the routes for your dependencies.
+
+list:
+    path:     /api/v1/books
+    methods:  [GET]
+    defaults: { _controller: 'App\Infrastructure\UI\Http\BooksController:listAction' }
+
+detail:
+    path:     /api/v1/books/{id}
+    methods:  [GET]
+    defaults: { _controller: 'App\Infrastructure\UI\Http\BooksController:detailAction' }
+
+create:
+    path:     /api/v1/books
+    methods:  [POST]
+    defaults: { _controller: 'App\Infrastructure\UI\Http\BooksController:newAction' }

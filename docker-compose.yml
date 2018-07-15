@@ -1,0 +1,29 @@
+version: "3.1"
+services:
+
+    webserver:
+      image: nginx:alpine
+      container_name: zeedo-webserver
+      working_dir: /zeedo
+      volumes:
+          - .:/zeedo
+          - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+        - "8090:80"
+      links:
+        - php-fpm
+
+    php-fpm:
+      build: ./docker/php-fpm
+      container_name: zeedo-php-fpm
+      working_dir: /zeedo
+      volumes:
+        - .:/zeedo
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+
+    zeedo:
+      image: abh1nav/dockerui
+      volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+      links:
+          - webserver
