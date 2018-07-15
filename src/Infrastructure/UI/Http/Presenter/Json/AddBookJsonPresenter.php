@@ -15,6 +15,6 @@ class AddBookJsonPresenter
             'author' => $book->author(),
             'price' => $book->price()
         ];
-        return ($response);
+        return $response;
     }
 }
